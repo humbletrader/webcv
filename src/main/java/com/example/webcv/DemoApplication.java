@@ -1,13 +1,20 @@
 package com.example.webcv;
 
-import com.example.webcv.entities.User;
-import com.example.webcv.repository.UserRepository;
+import com.example.webcv.experience.Experience;
+import com.example.webcv.experience.ExperienceModel;
+import com.example.webcv.user.User;
+import com.example.webcv.user.UserModel;
+import com.example.webcv.user.UserRepository;
+import com.example.webcv.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.lang.reflect.Executable;
+import java.util.Collections;
 
 
 @SpringBootApplication
@@ -20,14 +27,21 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserRepository userRepository){
+	public CommandLineRunner demo(UserService userService){
 		return (args) -> {
-			userRepository.save(new User(1, "firstone"));
-			userRepository.save(new User(2, "secondone"));
 
-			for (User user : userRepository.findAll()) {
-				log.info(" user : {}", user);
-			}
+
+
+//			userService.newUser(new UserModel(1, "firstone", Collections.emptySet()));
+//			userService.newUser(new UserModel(2, "secondone", Collections.emptySet()));
+
+//			userService.addExperience(1, new ExperienceModel("exp 100"));
+//			userService.addExperience(2, new ExperienceModel("exp 200"));
+//
+//			for (UserModel user : userService.retrieveAll()) {
+//				log.info(" user : {}", user);
+//			}
+
 		};
 	}
 
