@@ -12,7 +12,7 @@ public class Experience {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String title;
+    private String jobTitle;
 
     @ManyToOne
     private User user;
@@ -23,26 +23,26 @@ public class Experience {
     public Experience() {
     }
 
-    public Experience(Integer id, String title, String companyName){
+    public Experience(Integer id, String jobTitle, Company company){
         this.id = id;
-        this.title = title;
-        this.company = new Company(companyName);
+        this.jobTitle = jobTitle;
+        this.company = company;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String title) {
+        this.jobTitle = title;
     }
 
     public User getUser() {
@@ -80,7 +80,7 @@ public class Experience {
     public String toString() {
         return "Experience{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
                 '}';
     }
 }

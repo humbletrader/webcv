@@ -6,7 +6,7 @@ echo "*********************************************************"
 curl -v http://localhost:8080/webcv/user/1/experience \
      --header "Content-Type: application/json" \
      --request POST \
-     --data '{"title": "experience as team lead for a team of 5", "companyName" : "ibm"}'
+     --data '{"jobTitle": "experience as team lead for a team of 5", "companyId" : "1", "companyName" : "ibm"}'
 
 
 

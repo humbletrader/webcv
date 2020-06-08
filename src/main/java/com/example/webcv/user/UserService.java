@@ -6,7 +6,6 @@ import com.example.webcv.company.CompanyRepository;
 import com.example.webcv.experience.Experience;
 import com.example.webcv.experience.ExperienceModel;
 import com.example.webcv.experience.ExperienceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,14 +16,17 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
+    private CompanyRepository companyRepository;
+
     private UserRepository userRepository;
 
-    @Autowired
     private ExperienceRepository experienceRepository;
 
-    @Autowired
-    private CompanyRepository companyRepository;
+    public UserService(CompanyRepository companyRepository, ExperienceRepository experienceRepository, UserRepository userRepository){
+        this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
+        this.experienceRepository = experienceRepository;
+    }
 
     public Iterable<UserModel> retrieveAll() {
         List<UserModel> result = new ArrayList<>();
@@ -50,13 +52,16 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(userId);
         Optional<Integer> expId = optionalUser.map(
                 user -> {
-                    Company company = new Company(newExperience.getCompanyName());
+                    Company company = new Company();
+                    //we create a new company each time
+                    company.setName(newExperience.getCompanyName());
                     companyRepository.save(company);
 
                     Experience exp = new Experience();
                     exp.setUser(user);
-                    exp.setTitle(newExperience.getTitle());
+                    exp.setJobTitle(newExperience.getJobTitle());
                     exp.setCompany(company);
+
                     return experienceRepository.save(exp).getId();
                 });
         return  expId;

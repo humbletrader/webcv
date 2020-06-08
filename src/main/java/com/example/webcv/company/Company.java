@@ -1,19 +1,28 @@
 package com.example.webcv.company;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Company {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     private String name;
 
     public Company() {
     }
 
-    public Company(String name){
-        this.name = name;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -31,11 +40,14 @@ public class Company {
 
         Company company = (Company) o;
 
+        if (!id.equals(company.id)) return false;
         return name.equals(company.name);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }
