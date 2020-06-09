@@ -18,6 +18,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Experience> experience = new HashSet<>();
+
     public User(){}
 
     public User(Integer id, String username){

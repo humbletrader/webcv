@@ -1,6 +1,5 @@
 package com.example.webcv.user;
 
-import com.example.webcv.experience.Experience;
 import com.example.webcv.experience.ExperienceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class UserController {
 
     @RequestMapping (path = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserModel>> retrieveUsers(){
-        return new ResponseEntity<>(userService.retrieveAll(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.retrieveAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/user/{id}")

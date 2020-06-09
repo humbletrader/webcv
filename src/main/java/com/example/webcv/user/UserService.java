@@ -16,11 +16,11 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private ExperienceRepository experienceRepository;
+    private final ExperienceRepository experienceRepository;
 
     public UserService(CompanyRepository companyRepository, ExperienceRepository experienceRepository, UserRepository userRepository){
         this.companyRepository = companyRepository;
@@ -28,7 +28,7 @@ public class UserService {
         this.experienceRepository = experienceRepository;
     }
 
-    public Iterable<UserModel> retrieveAll() {
+    public Iterable<UserModel> retrieveAllUsers() {
         List<UserModel> result = new ArrayList<>();
         Iterator<User> users = userRepository.findAll().iterator();
         for (Iterator<User> it = users; it.hasNext(); ) {
@@ -50,21 +50,19 @@ public class UserService {
     public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience){
 
         Optional<User> optionalUser = userRepository.findById(userId);
-        Optional<Integer> expId = optionalUser.map(
-                user -> {
-                    Company company = new Company();
-                    //we create a new company each time
-                    company.setName(newExperience.getCompanyName());
-                    companyRepository.save(company);
+        return optionalUser.map( user -> {
+            Company company = new Company();
+            //we create a new company each time
+            company.setName(newExperience.getCompanyName());
+            companyRepository.save(company);
 
-                    Experience exp = new Experience();
-                    exp.setUser(user);
-                    exp.setJobTitle(newExperience.getJobTitle());
-                    exp.setCompany(company);
+            Experience exp = new Experience();
+            exp.setUser(user);
+            exp.setJobTitle(newExperience.getJobTitle());
+            exp.setCompany(company);
 
-                    return experienceRepository.save(exp).getId();
-                });
-        return  expId;
+            return experienceRepository.save(exp).getId();
+        });
     }
 
 }
