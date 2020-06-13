@@ -1,10 +1,5 @@
 package com.example.webcv;
 
-import com.example.webcv.experience.Experience;
-import com.example.webcv.experience.ExperienceModel;
-import com.example.webcv.user.User;
-import com.example.webcv.user.UserModel;
-import com.example.webcv.user.UserRepository;
 import com.example.webcv.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.lang.reflect.Executable;
-import java.util.Collections;
 
 
 @SpringBootApplication

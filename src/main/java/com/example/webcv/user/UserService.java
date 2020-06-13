@@ -22,6 +22,7 @@ public class UserService {
 
     private final ExperienceRepository experienceRepository;
 
+    //autowiring done by default by spring
     public UserService(CompanyRepository companyRepository, ExperienceRepository experienceRepository, UserRepository userRepository){
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
@@ -45,6 +46,20 @@ public class UserService {
         User newUser = new User();
         newUser.setUsername(userModel.getUsername());
         return userRepository.save(newUser).getId();
+    }
+
+    public Integer updateUser(UserModel userModel) throws UserDoesNotExistException {
+        boolean userExists = userRepository.existsById(userModel.getId());
+        if(userExists){
+            User modifiedUser = new User(userModel.getId(), userModel.getUsername());
+            return userRepository.save(modifiedUser).getId();
+        } else {
+            throw new UserDoesNotExistException();
+        }
+    }
+
+    public void deleteUser(Integer userId) {
+        userRepository.deleteById(userId);
     }
 
     public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience){
