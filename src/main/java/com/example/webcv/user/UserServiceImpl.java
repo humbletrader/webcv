@@ -14,8 +14,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-@Profile("default")
 @Service
+@Profile("default")
 public class UserServiceImpl implements UserService {
 
     private final CompanyRepository companyRepository;

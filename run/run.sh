@@ -12,6 +12,9 @@
 # running as a jar
 java -jar target/webcv-0.0.1-SNAPSHOT.jar
 
+# running as a jar with a specific profile
+java -jar target/webcv-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=dev
+
 # running as a jar with external properties 
 java -jar ../target/webcv-0.0.1-SNAPSHOT.jar --spring.config.location=./external.application.properties
 

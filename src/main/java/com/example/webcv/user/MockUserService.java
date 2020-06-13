@@ -6,9 +6,31 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Profile("mock")
+@Profile("test")
 @Service
 public class MockUserService implements UserService{
+
+    public MockUserService(){
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("------------   mock service -------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
+    }
 
     @Override
     public Iterable<UserModel> retrieveAllUsers() {
