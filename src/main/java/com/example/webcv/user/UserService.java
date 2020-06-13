@@ -1,83 +1,20 @@
 package com.example.webcv.user;
 
-
-import com.example.webcv.company.Company;
-import com.example.webcv.company.CompanyRepository;
-import com.example.webcv.experience.Experience;
 import com.example.webcv.experience.ExperienceModel;
-import com.example.webcv.experience.ExperienceRepository;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    private final CompanyRepository companyRepository;
+    Iterable<UserModel> retrieveAllUsers();
 
-    private final UserRepository userRepository;
+    Optional<UserModel> retrieveUser(Integer userId);
 
-    private final ExperienceRepository experienceRepository;
+    Integer newUser(UserModel userModel);
 
-    //autowiring done by default by spring
-    public UserService(CompanyRepository companyRepository, ExperienceRepository experienceRepository, UserRepository userRepository){
-        this.companyRepository = companyRepository;
-        this.userRepository = userRepository;
-        this.experienceRepository = experienceRepository;
-    }
+    Integer updateUser(UserModel userModel) throws UserDoesNotExistException;
 
-    public Iterable<UserModel> retrieveAllUsers() {
-        List<UserModel> result = new ArrayList<>();
-        Iterator<User> users = userRepository.findAll().iterator();
-        for (Iterator<User> it = users; it.hasNext(); ) {
-            result.add(new UserModel(it.next()));
-        }
-        return result;
-    }
+    void deleteUser(Integer userId);
 
-    public Optional<UserModel> retrieveUser(Integer userId){
-        return userRepository.findById(userId).map(UserModel::new);
-    }
-
-    public Integer newUser(UserModel userModel){
-        User newUser = new User();
-        newUser.setUsername(userModel.getUsername());
-        return userRepository.save(newUser).getId();
-    }
-
-    public Integer updateUser(UserModel userModel) throws UserDoesNotExistException {
-        boolean userExists = userRepository.existsById(userModel.getId());
-        if(userExists){
-            User modifiedUser = new User(userModel.getId(), userModel.getUsername());
-            return userRepository.save(modifiedUser).getId();
-        } else {
-            throw new UserDoesNotExistException();
-        }
-    }
-
-    public void deleteUser(Integer userId) {
-        userRepository.deleteById(userId);
-    }
-
-    public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience){
-
-        Optional<User> optionalUser = userRepository.findById(userId);
-        return optionalUser.map( user -> {
-            Company company = new Company();
-            //we create a new company each time
-            company.setName(newExperience.getCompanyName());
-            companyRepository.save(company);
-
-            Experience exp = new Experience();
-            exp.setUser(user);
-            exp.setJobTitle(newExperience.getJobTitle());
-            exp.setCompany(company);
-
-            return experienceRepository.save(exp).getId();
-        });
-    }
-
+    Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience);
 }

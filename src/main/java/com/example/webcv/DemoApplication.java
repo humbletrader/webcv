@@ -1,6 +1,7 @@
 package com.example.webcv;
 
 import com.example.webcv.user.UserService;
+import com.example.webcv.user.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -18,11 +19,11 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner demo(UserService userService){
-		return (args) -> {
-
-
+//	@Bean
+//	public CommandLineRunner demo(UserService userService){
+//		return (args) -> {
+//
+//
 
 //			userService.newUser(new UserModel(1, "firstone", Collections.emptySet()));
 //			userService.newUser(new UserModel(2, "secondone", Collections.emptySet()));
@@ -33,9 +34,9 @@ public class DemoApplication {
 //			for (UserModel user : userService.retrieveAll()) {
 //				log.info(" user : {}", user);
 //			}
-
-		};
-	}
+//
+//		};
+//	}
 
 
 }

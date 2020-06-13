@@ -13,7 +13,6 @@ curl -v http://localhost:8080/webcv/user \
      --request POST \
      --data '{"username": "the_second"}'
 
-
 printf "\n\n**********************************************************"
 printf "\n             listing all users"
 printf "\n**********************************************************\n"

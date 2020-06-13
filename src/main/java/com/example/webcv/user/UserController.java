@@ -1,7 +1,6 @@
 package com.example.webcv.user;
 
 import com.example.webcv.experience.ExperienceModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
