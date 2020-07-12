@@ -5,6 +5,7 @@ import com.example.webcv.experience.Experience;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -16,14 +17,21 @@ public class User {
 
     private String username;
 
+    private String photoLink;
+
     @OneToMany(mappedBy = "user")
     private Set<Experience> experience = new HashSet<>();
 
     public User(){}
 
     public User(Integer id, String username){
+        this(id, username, null);
+    }
+
+    public User(Integer id, String username, String photoLink) {
         this.id = id;
         this.username = username;
+        this.photoLink = photoLink;
     }
 
     public Integer getId() {

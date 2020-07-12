@@ -18,7 +18,7 @@ import javax.annotation.PreDestroy;
 import java.util.Optional;
 
 @Service
-@Primary
+@Primary //stupid way of enforcing this bean
 public class MockUserService implements UserService,
         BeanFactoryAware, BeanNameAware, ApplicationContextAware, InitializingBean ,
         BeanPostProcessor {

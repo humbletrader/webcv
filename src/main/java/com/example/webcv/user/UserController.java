@@ -18,12 +18,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    //check below for a simple usage ( shortcat GetMapping)
     @RequestMapping (path = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserModel>> retrieveUsers(){
         return new ResponseEntity<>(userService.retrieveAllUsers(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/user/{id}")
+    @GetMapping(path = "/users/{id}")
     public ResponseEntity<UserModel> retrieveUser(@PathVariable(name = "id") Integer userId){
         UserModel user = userService.retrieveUser(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT)); // returning 409 just for the sake of doing it
@@ -31,13 +32,13 @@ public class UserController {
     }
 
     //@RequestMapping(path = "/user", method = RequestMethod.POST)
-    @PostMapping(path ="/user")
+    @PostMapping(path ="/users")
     public ResponseEntity<Integer> addUser(@RequestBody() UserModel user){
         Integer newUserId = userService.newUser(user);
         return new ResponseEntity<>(newUserId, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/user")
+    @PutMapping(path = "/users")
     public ResponseEntity<Integer> modifyUser(@RequestBody() UserModel userModel){
         ResponseEntity<Integer> response;
         try {
@@ -49,13 +50,13 @@ public class UserController {
         return response;
     }
 
-    @DeleteMapping(path = "/user/{userId}")
+    @DeleteMapping(path = "/users/{userId}")
     public ResponseEntity<Integer> deleteUser(@PathVariable Integer userId){
         userService.deleteUser(userId);
         return new ResponseEntity<>(userId, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/user/{id}/experience")
+    @PostMapping(path = "/users/{id}/experience")
     public ResponseEntity<Integer> addExperience(@PathVariable(name = "id") Integer userId,
                                                  @RequestBody() ExperienceModel experience){
 

@@ -24,8 +24,10 @@ public class UserServiceImpl implements UserService {
 
     private final ExperienceRepository experienceRepository;
 
-    //autowiring done by default by spring
-    public UserServiceImpl(CompanyRepository companyRepository, ExperienceRepository experienceRepository, UserRepository userRepository){
+    //autowiring of parameters done by default by spring (since 4.x or something)
+    public UserServiceImpl(CompanyRepository companyRepository,
+                           ExperienceRepository experienceRepository,
+                           UserRepository userRepository){
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
         this.experienceRepository = experienceRepository;
