@@ -1,5 +1,6 @@
 package com.example.webcv.user;
 
+import com.example.webcv.certification.CertificationModel;
 import com.example.webcv.experience.ExperienceModel;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -72,6 +73,11 @@ public class MockUserService implements UserService,
 
     @Override
     public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Integer> addCertification(Integer userId, CertificationModel newCertification){
         return Optional.empty();
     }
 

@@ -1,5 +1,6 @@
 package com.example.webcv.user;
 
+import com.example.webcv.certification.CertificationModel;
 import com.example.webcv.experience.ExperienceModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +63,13 @@ public class UserController {
 
         Optional<Integer> expId = userService.addExperience(userId, experience);
         return new ResponseEntity<>(expId.orElse(-1), HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/users/{id}/certifications")
+    public ResponseEntity<Integer> addCertification(@PathVariable(name = "id") Integer userId,
+                                                    @RequestBody() CertificationModel certifModel){
+        Optional<Integer> id = userService.addCertification(userId, certifModel);
+        return new ResponseEntity<>(id.orElse(-1), HttpStatus.CREATED);
     }
 
 }

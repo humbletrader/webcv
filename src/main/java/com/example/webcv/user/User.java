@@ -1,11 +1,11 @@
 package com.example.webcv.user;
 
 
+import com.example.webcv.certification.Certification;
 import com.example.webcv.experience.Experience;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -23,6 +23,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Experience> experience = new HashSet<>();
+
+    @ManyToMany
+    private Set<Certification> certifications = new HashSet<>();
 
     public User(){}
 
@@ -46,6 +49,23 @@ public class User {
         this.username = username;
     }
 
+    public String getPhotoLink() {
+        return photoLink;
+    }
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
+    }
+
+    public String getFirstName() { return firstName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {return lastName;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Set<Experience> getExperience() {
         return experience;
     }
@@ -53,28 +73,9 @@ public class User {
         this.experience = experience;
     }
 
-    public String getPhotoLink() {
-        return photoLink;
-    }
-
-    public void setPhotoLink(String photoLink) {
-        this.photoLink = photoLink;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Set<Certification> getCertifications(){ return certifications; }
+    public void setCertifications(Set<Certification> certifications){
+        this.certifications = certifications;
     }
 
     @Override
