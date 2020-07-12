@@ -52,6 +52,9 @@ public class UserServiceImpl implements UserService {
     public Integer newUser(UserModel userModel){
         User newUser = new User();
         newUser.setUsername(userModel.getUsername());
+        newUser.setFirstName(userModel.getFirstName());
+        newUser.setLastName(userModel.getLastName());
+        newUser.setPhotoLink(userModel.getPhotoLink());
         return userRepository.save(newUser).getId();
     }
 
@@ -59,7 +62,12 @@ public class UserServiceImpl implements UserService {
     public Integer updateUser(UserModel userModel) throws UserDoesNotExistException {
         boolean userExists = userRepository.existsById(userModel.getId());
         if(userExists){
-            User modifiedUser = new User(userModel.getId(), userModel.getUsername());
+            User modifiedUser = new User(userModel.getId(),
+                    userModel.getUsername(),
+                    userModel.getFirstName(),
+                    userModel.getLastName(),
+                    userModel.getPhotoLink()
+            );
             return userRepository.save(modifiedUser).getId();
         } else {
             throw new UserDoesNotExistException();

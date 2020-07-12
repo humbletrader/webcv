@@ -8,12 +8,12 @@ printf "\n**********************************************************\n"
 curl -v http://localhost:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request POST \
-     --data '{"username": "the_first"}'
+     --data '{"username": "the_first", "firstName": "The", "lastName": "First", "photoLink": "http://localhost/images/1"}'
 
 curl -v http://localhost:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request POST \
-     --data '{"username": "the_second"}'
+     --data '{"username": "the_second", "firstName": "The", "lastName": "Second", "photoLink": "http://localhost/images/2"}'
 
 printf "\n\n**********************************************************"
 printf "\n             listing all users"
@@ -37,7 +37,7 @@ printf "\n**********************************************************\n"
 curl -v http://localhost:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request POST \
-     --data '{"username": "third"}'
+     --data '{"username": "the_third", "firstName": "The", "lastName": "Third", "photoLink": "http://localhost/images/3}'
 
 printf "\n\n*********************************************************"
 printf "\n          modifying a user via PUT method "

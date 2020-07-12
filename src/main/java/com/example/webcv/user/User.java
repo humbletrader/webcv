@@ -17,6 +17,8 @@ public class User {
 
     private String username;
 
+    private String firstName;
+    private String lastName;
     private String photoLink;
 
     @OneToMany(mappedBy = "user")
@@ -24,13 +26,11 @@ public class User {
 
     public User(){}
 
-    public User(Integer id, String username){
-        this(id, username, null);
-    }
-
-    public User(Integer id, String username, String photoLink) {
+    public User(Integer id, String username, String firstName, String lastName, String photoLink) {
         this.id = id;
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.photoLink = photoLink;
     }
 
@@ -51,6 +51,30 @@ public class User {
     }
     public void setExperience(Set<Experience> experience){
         this.experience = experience;
+    }
+
+    public String getPhotoLink() {
+        return photoLink;
+    }
+
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override

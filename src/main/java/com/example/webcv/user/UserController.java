@@ -31,7 +31,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    //@RequestMapping(path = "/user", method = RequestMethod.POST)
+    //@RequestMapping(path = "/users", method = RequestMethod.POST)
     @PostMapping(path ="/users")
     public ResponseEntity<Integer> addUser(@RequestBody() UserModel user){
         Integer newUserId = userService.newUser(user);
