@@ -9,6 +9,8 @@ import com.example.webcv.company.CompanyRepository;
 import com.example.webcv.experience.Experience;
 import com.example.webcv.experience.ExperienceModel;
 import com.example.webcv.experience.ExperienceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import java.util.Optional;
 @Service
 @Profile("default")
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final CompanyRepository companyRepository;
 
@@ -91,10 +95,17 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> optionalUser = userRepository.findById(userId);
         return optionalUser.map( user -> {
-            Company company = new Company();
-            //we create a new company each time
-            company.setName(newExperience.getCompanyName());
-            companyRepository.save(company);
+
+            ;
+
+            Company company = companyRepository
+                    .findByName(newExperience.getCompanyName())
+                    .orElseGet(() -> {
+                        logger.info("company {} not found. Creating new company ..", newExperience.getCompanyName());
+                        Company newComp = new Company();
+                        newComp.setName(newExperience.getCompanyName());
+                        return companyRepository.save(newComp);
+                    });
 
             Experience exp = new Experience();
             exp.setUser(user);
@@ -114,11 +125,7 @@ public class UserServiceImpl implements UserService {
             newCertification.setId(certifModel.getCertificationId());
             newCertification.setCertificationName(certifModel.getCertificationName());
             newCertification.getUsers().add(user);
-
-
             user.getCertifications().add(certificationRepository.save(newCertification));
-
-
             userRepository.save(user);
 
             return newCertification.getId();

@@ -2,7 +2,6 @@ package com.example.webcv.experience;
 
 public class ExperienceModel {
 
-    private Integer companyId;
     private String companyName;
     private String jobTitle;
 
@@ -10,24 +9,14 @@ public class ExperienceModel {
 
     }
 
-    public ExperienceModel(String jobTitle, Integer companyId, String companyName) {
+    public ExperienceModel(String jobTitle, String companyName) {
         this.jobTitle = jobTitle;
-        this.companyId = companyId;
         this.companyName = companyName;
     }
 
     public ExperienceModel(Experience source){
         this.jobTitle = source.getJobTitle();
-        this.companyId = source.getCompany().getId();
         this.companyName = source.getCompany().getName();
-    }
-
-    public Integer getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
     }
 
     public String getJobTitle() {
