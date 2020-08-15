@@ -135,6 +135,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<Integer> deleteExperience(Integer userId, Integer experienceId) {
+        return userRepository
+                .findById(userId)
+                .flatMap(user -> {
+                    //todo: delete in one single statement (where userid = ? and expId =? )
+                    experienceRepository.deleteById(experienceId);
+                    return Optional.empty();
+                });
+    }
+
+    @Override
     public Optional<Integer> addCertification(Integer userId, CertificationModel certifModel) {
         return userRepository.findById(userId).map(user -> {
 

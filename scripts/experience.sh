@@ -18,4 +18,17 @@ curl -v http://localhost:$TOMCAT_PORT/webcv/users/1/experience \
      --request PUT \
      --data '{"expId": "4", "jobTitle": "team lead for a team of 10 for a java project", "companyName" : "ibm", "jobStart": "31/01/2010", "jobEnd":"25/12/2016"}'
 
+printf "\n\n*********************************************************"
+printf "  adding experience to remove it later "
+printf "*********************************************************"
+curl -v http://localhost:$TOMCAT_PORT/webcv/users/1/experience \
+     --header "Content-Type: application/json" \
+     --request POST \
+     --data '{"jobTitle": "this job will be deleted", "companyName" : "home", "jobStart": "31/01/2010", "jobEnd":"31/12/2016"}'
+
+printf "\n\n*********************************************************"
+printf "  adding experience to remove it later "
+printf "*********************************************************"
+curl -v http://localhost:$TOMCAT_PORT/webcv/users/1/experience/6 \
+     --request DELETE
 

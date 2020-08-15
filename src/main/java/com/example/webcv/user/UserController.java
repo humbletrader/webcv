@@ -80,6 +80,13 @@ public class UserController {
                 .orElse(new ResponseEntity<>(-1, HttpStatus.CONFLICT));
     }
 
+    @DeleteMapping(path = "/users/{userId}/experience/{expId}")
+    public ResponseEntity<Integer> deleteExperience(@PathVariable(name = "userId") Integer userId,
+                                                    @PathVariable(name="expId") Integer expId){
+        userService.deleteExperience(userId, expId);
+        return new ResponseEntity<>(userId, HttpStatus.OK);
+    }
+
     @PostMapping(path = "/users/{id}/certifications")
     public ResponseEntity<Integer> addCertification(@PathVariable(name = "id") Integer userId,
                                                     @RequestBody() CertificationModel certifModel){

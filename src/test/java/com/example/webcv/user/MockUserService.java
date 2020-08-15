@@ -82,6 +82,11 @@ public class MockUserService implements UserService,
     }
 
     @Override
+    public Optional<Integer> deleteExperience(Integer userId, Integer experienceId){
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Integer> addCertification(Integer userId, CertificationModel newCertification){
         return Optional.empty();
     }

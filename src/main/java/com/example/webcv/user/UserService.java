@@ -21,5 +21,7 @@ public interface UserService {
 
     Optional<Integer> updateExperience(Integer userId, ExperienceModel updatedExperience);
 
+    Optional<Integer> deleteExperience(Integer userId, Integer experienceId);
+
     Optional<Integer> addCertification(Integer userId, CertificationModel certificationName);
 }
