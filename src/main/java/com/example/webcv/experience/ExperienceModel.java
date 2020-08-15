@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public class ExperienceModel {
 
+    private Integer expId;
+
     private String companyName;
     private String jobTitle;
 
@@ -19,10 +21,12 @@ public class ExperienceModel {
 
     }
 
-    public ExperienceModel(String jobTitle,
-                           String companyName,
-                           LocalDate jobStartDate,
-                           LocalDate jobEndDate) {
+    public ExperienceModel( Integer expId,
+                            String jobTitle,
+                            String companyName,
+                            LocalDate jobStartDate,
+                            LocalDate jobEndDate) {
+        this.expId = expId;
         this.jobTitle = jobTitle;
         this.companyName = companyName;
         this.jobStart = jobStartDate;
@@ -30,10 +34,19 @@ public class ExperienceModel {
     }
 
     public ExperienceModel(Experience source){
+        this.expId = source.getId();
         this.jobTitle = source.getJobTitle();
         this.companyName = source.getCompany().getName();
         this.jobStart = source.getStart();
         this.jobEnd = source.getEnd();
+    }
+
+    public Integer getExpId() {
+        return expId;
+    }
+
+    public void setExpId(Integer expId) {
+        this.expId = expId;
     }
 
     public String getJobTitle() {
@@ -64,7 +77,7 @@ public class ExperienceModel {
         return jobEnd;
     }
 
-    public void setJobEndDate(LocalDate jobEndDate) {
+    public void setJobEnd(LocalDate jobEndDate) {
         this.jobEnd = jobEndDate;
     }
 }

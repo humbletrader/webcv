@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(CompanyRepository companyRepository,
                            ExperienceRepository experienceRepository,
                            CertificationRepository certificationRepository,
-                           UserRepository userRepository){
+                           UserRepository userRepository) {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
         this.experienceRepository = experienceRepository;
@@ -48,19 +48,19 @@ public class UserServiceImpl implements UserService {
     public Iterable<UserModel> retrieveAllUsers() {
         List<UserModel> result = new ArrayList<>();
         Iterator<User> users = userRepository.findAll().iterator();
-        for ( ; users.hasNext(); ) {
+        for (; users.hasNext(); ) {
             result.add(new UserModel(users.next()));
         }
         return result;
     }
 
     @Override
-    public Optional<UserModel> retrieveUser(Integer userId){
+    public Optional<UserModel> retrieveUser(Integer userId) {
         return userRepository.findById(userId).map(UserModel::new);
     }
 
     @Override
-    public Integer newUser(UserModel userModel){
+    public Integer newUser(UserModel userModel) {
         User newUser = new User();
         newUser.setUsername(userModel.getUsername());
         newUser.setFirstName(userModel.getFirstName());
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer updateUser(UserModel userModel) throws UserDoesNotExistException {
         boolean userExists = userRepository.existsById(userModel.getId());
-        if(userExists){
+        if (userExists) {
             User modifiedUser = new User(userModel.getId(),
                     userModel.getUsername(),
                     userModel.getFirstName(),
@@ -91,10 +91,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience){
+    public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience) {
 
         Optional<User> optionalUser = userRepository.findById(userId);
-        return optionalUser.map( user -> {
+        return optionalUser.map(user -> {
             Company company = companyRepository
                     .findByName(newExperience.getCompanyName())
                     .orElseGet(() -> {
@@ -116,7 +116,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Integer> addCertification(Integer userId, CertificationModel certifModel){
+    public Optional<Integer> updateExperience(Integer userId, ExperienceModel updatedExperience) {
+        logger.info("searching for user {} and experience {}", userId, updatedExperience.getExpId());
+        return userRepository.findById(userId).flatMap(user -> {
+            logger.info("found user {} ", user.getId());
+            //todo: we should replace this with a single findByUserAndExpId instead of performing two queries
+            return experienceRepository
+                    .findById(updatedExperience.getExpId())
+                    .map(experience -> {
+                        logger.info("found experience {}", experience.getId());
+                        experience.setJobTitle(updatedExperience.getJobTitle());
+                        //todo: handle change of company
+                        experience.setStart(updatedExperience.getJobStart());
+                        experience.setEnd(updatedExperience.getJobEnd());
+                        return experienceRepository.save(experience).getId();
+                    });
+        });
+    }
+
+    @Override
+    public Optional<Integer> addCertification(Integer userId, CertificationModel certifModel) {
         return userRepository.findById(userId).map(user -> {
 
             //todo: check if the certification already exists

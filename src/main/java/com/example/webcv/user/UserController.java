@@ -2,6 +2,8 @@ package com.example.webcv.user;
 
 import com.example.webcv.certification.CertificationModel;
 import com.example.webcv.experience.ExperienceModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/webcv")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
@@ -63,6 +67,17 @@ public class UserController {
 
         Optional<Integer> expId = userService.addExperience(userId, experience);
         return new ResponseEntity<>(expId.orElse(-1), HttpStatus.CREATED);
+    }
+
+    @PutMapping(path = "/users/{userId}/experience")
+    public ResponseEntity<Integer> updateExperience(@PathVariable("userId") Integer userId,
+                                                    @RequestBody() ExperienceModel experience){
+        return userService.updateExperience(userId, experience)
+                .map(expId -> {
+                    logger.info("updated experience {}", experience.getExpId());
+                    return new ResponseEntity<>(expId, HttpStatus.ACCEPTED);
+                })
+                .orElse(new ResponseEntity<>(-1, HttpStatus.CONFLICT));
     }
 
     @PostMapping(path = "/users/{id}/certifications")
