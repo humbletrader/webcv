@@ -4,6 +4,7 @@ import com.example.webcv.company.Company;
 import com.example.webcv.user.User;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Experience {
@@ -20,13 +21,18 @@ public class Experience {
     @ManyToOne
     private Company company;
 
+    private LocalDate start;
+    private LocalDate end;
+
     public Experience() {
     }
 
-    public Experience(Integer id, String jobTitle, Company company){
+    public Experience(Integer id, String jobTitle, Company company, LocalDate start, LocalDate end){
         this.id = id;
         this.jobTitle = jobTitle;
         this.company = company;
+        this.start = start;
+        this.end = end;
     }
 
     public Integer getId() {
@@ -59,6 +65,22 @@ public class Experience {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public LocalDate getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDate start) {
+        this.start = start;
+    }
+
+    public LocalDate getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDate end) {
+        this.end = end;
     }
 
     @Override

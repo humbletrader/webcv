@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
     public Iterable<UserModel> retrieveAllUsers() {
         List<UserModel> result = new ArrayList<>();
         Iterator<User> users = userRepository.findAll().iterator();
-        for (Iterator<User> it = users; it.hasNext(); ) {
-            result.add(new UserModel(it.next()));
+        for ( ; users.hasNext(); ) {
+            result.add(new UserModel(users.next()));
         }
         return result;
     }
@@ -95,9 +95,6 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> optionalUser = userRepository.findById(userId);
         return optionalUser.map( user -> {
-
-            ;
-
             Company company = companyRepository
                     .findByName(newExperience.getCompanyName())
                     .orElseGet(() -> {
@@ -111,6 +108,8 @@ public class UserServiceImpl implements UserService {
             exp.setUser(user);
             exp.setJobTitle(newExperience.getJobTitle());
             exp.setCompany(company);
+            exp.setStart(newExperience.getJobStart());
+            exp.setEnd(newExperience.getJobEnd());
 
             return experienceRepository.save(exp).getId();
         });
