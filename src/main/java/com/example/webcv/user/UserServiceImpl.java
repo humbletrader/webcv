@@ -106,8 +106,8 @@ public class UserServiceImpl implements UserService {
             exp.setUser(user);
             exp.setJobTitle(newExperience.getJobTitle());
             exp.setCompany(company);
-            exp.setStart(newExperience.getJobStart());
-            exp.setEnd(newExperience.getJobEnd());
+            exp.setJobStart(newExperience.getJobStart());
+            exp.setJobEnd(newExperience.getJobEnd());
 
             return experienceRepository.save(exp).getId();
         });
@@ -125,8 +125,8 @@ public class UserServiceImpl implements UserService {
                         logger.info("found experience {}", experience.getId());
                         experience.setJobTitle(updatedExperience.getJobTitle());
                         //todo: handle change of company
-                        experience.setStart(updatedExperience.getJobStart());
-                        experience.setEnd(updatedExperience.getJobEnd());
+                        experience.setJobStart(updatedExperience.getJobStart());
+                        experience.setJobEnd(updatedExperience.getJobEnd());
                         return experienceRepository.save(experience).getId();
                     });
         });

@@ -37,8 +37,8 @@ public class ExperienceModel {
         this.expId = source.getId();
         this.jobTitle = source.getJobTitle();
         this.companyName = source.getCompany().getName();
-        this.jobStart = source.getStart();
-        this.jobEnd = source.getEnd();
+        this.jobStart = source.getJobStart();
+        this.jobEnd = source.getJobEnd();
     }
 
     public Integer getExpId() {

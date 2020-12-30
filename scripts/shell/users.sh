@@ -1,16 +1,17 @@
 #!/bin/sh
 
+APP_HOST=localhost
 TOMCAT_PORT=8081
 
 printf "\n\n*********************************************************"
 printf "\n          adding two users "
 printf "\n**********************************************************\n"
-curl -v http://localhost:$TOMCAT_PORT/webcv/users \
+curl -v http://$APP_HOST:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request POST \
      --data '{"username": "the_first", "firstName": "The", "lastName": "First", "photoLink": "http://localhost/images/1"}'
 
-curl -v http://localhost:$TOMCAT_PORT/webcv/users \
+curl -v http://$APP_HOST:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request POST \
      --data '{"username": "the_second", "firstName": "The", "lastName": "Second", "photoLink": "http://localhost/images/2"}'
@@ -18,31 +19,31 @@ curl -v http://localhost:$TOMCAT_PORT/webcv/users \
 printf "\n\n**********************************************************"
 printf "\n             listing all users"
 printf "\n**********************************************************\n"
-curl -v localhost:$TOMCAT_PORT/webcv/users
+curl -v $APP_HOST:$TOMCAT_PORT/webcv/users
 
 printf "\n\n**********************************************************"
 printf "\n             listing one single user"
 printf "\n**********************************************************\n"
-curl -v  localhost:$TOMCAT_PORT/webcv/users/1
+curl -v  $APP_HOST:$TOMCAT_PORT/webcv/users/1
 
 printf "\n\n**********************************************************"
 printf "\n              listing non existent user"
 printf "\n**********************************************************\n"
-curl -v localhost:$TOMCAT_PORT/webcv/users/123456789
+curl -v $APP_HOST:$TOMCAT_PORT/webcv/users/123456789
 
 
 printf "\n\n*********************************************************"
 printf "\n          adding a new user "
 printf "\n**********************************************************\n"
-curl -v http://localhost:$TOMCAT_PORT/webcv/users \
+curl -v http://$APP_HOST:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request POST \
-     --data '{"username": "the_third", "firstName": "The", "lastName": "Third", "photoLink": "http://localhost/images/3}'
+     --data '{"username": "the_third", "firstName": "The", "lastName": "Third", "photoLink": "http://internet/images/3}'
 
 printf "\n\n*********************************************************"
 printf "\n          modifying a user via PUT method "
 printf "\n**********************************************************\n"
-curl -v http://localhost:$TOMCAT_PORT/webcv/users \
+curl -v http://$APP_HOST:$TOMCAT_PORT/webcv/users \
      --header "Content-Type: application/json" \
      --request PUT \
      --data '{"id":"3", "username": "THE_THIRD"}'
@@ -51,12 +52,12 @@ curl -v http://localhost:$TOMCAT_PORT/webcv/users \
 printf "\n\n**********************************************************"
 printf "\n             listing all users after update "
 printf "\n**********************************************************\n"
-curl -v localhost:$TOMCAT_PORT/webcv/users
+curl -v $APP_HOST:$TOMCAT_PORT/webcv/users
 
 printf "\n\n**********************************************************"
 printf "\n             deleting a user "
 printf "\n**********************************************************\n"
-curl http://localhost:$TOMCAT_PORT/webcv/users/3 \
+curl http://$APP_HOST:$TOMCAT_PORT/webcv/users/3 \
  --request DELETE
 
 

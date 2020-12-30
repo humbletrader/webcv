@@ -21,18 +21,18 @@ public class Experience {
     @ManyToOne
     private Company company;
 
-    private LocalDate start;
-    private LocalDate end;
+    private LocalDate jobStart;
+    private LocalDate jobEnd;
 
     public Experience() {
     }
 
-    public Experience(Integer id, String jobTitle, Company company, LocalDate start, LocalDate end){
+    public Experience(Integer id, String jobTitle, Company company, LocalDate jobStart, LocalDate jobEnd){
         this.id = id;
         this.jobTitle = jobTitle;
         this.company = company;
-        this.start = start;
-        this.end = end;
+        this.jobStart = jobStart;
+        this.jobEnd = jobEnd;
     }
 
     public Integer getId() {
@@ -67,20 +67,20 @@ public class Experience {
         this.company = company;
     }
 
-    public LocalDate getStart() {
-        return start;
+    public LocalDate getJobStart() {
+        return jobStart;
     }
 
-    public void setStart(LocalDate start) {
-        this.start = start;
+    public void setJobStart(LocalDate start) {
+        this.jobStart = start;
     }
 
-    public LocalDate getEnd() {
-        return end;
+    public LocalDate getJobEnd() {
+        return jobEnd;
     }
 
-    public void setEnd(LocalDate end) {
-        this.end = end;
+    public void setJobEnd(LocalDate end) {
+        this.jobEnd = end;
     }
 
     @Override
