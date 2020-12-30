@@ -1,0 +1,14 @@
+
+# server properties
+server:
+  port: 8081
+
+#h2 database properties
+spring :
+  jpa:
+    show-sql: false
+  datasource :
+    driverClassName: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}

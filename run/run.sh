@@ -1,13 +1,11 @@
 #!/bin/sh
 
-# running via maven 
-# mvn clean spring-boot:run
-
+# running via maven
+export spring_profiles_active=dev
+mvn clean spring-boot:run
 
 # running via maven with external properties 
 
-
-# running via maven with external profiles
 
 # running as a jar
 java -jar target/webcv-0.0.1-SNAPSHOT.jar

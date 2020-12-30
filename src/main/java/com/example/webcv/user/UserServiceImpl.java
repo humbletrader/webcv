@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Profile("default")
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mvn spring-boot:build-image
+sudo env "PATH=$PATH" mvn spring-boot:build-image
