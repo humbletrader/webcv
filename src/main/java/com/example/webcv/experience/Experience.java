@@ -1,7 +1,7 @@
 package com.example.webcv.experience;
 
 import com.example.webcv.company.Company;
-import com.example.webcv.user.User;
+import com.example.webcv.user.AppUser;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ public class Experience {
     private String jobTitle;
 
     @ManyToOne
-    private User user;
+    private AppUser appUser;
 
     @ManyToOne
     private Company company;
@@ -51,12 +51,12 @@ public class Experience {
         this.jobTitle = title;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Company getCompany() {

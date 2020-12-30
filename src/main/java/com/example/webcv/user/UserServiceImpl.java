@@ -11,7 +11,6 @@ import com.example.webcv.experience.ExperienceModel;
 import com.example.webcv.experience.ExperienceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<UserModel> retrieveAllUsers() {
         List<UserModel> result = new ArrayList<>();
-        Iterator<User> users = userRepository.findAll().iterator();
+        Iterator<AppUser> users = userRepository.findAll().iterator();
         for (; users.hasNext(); ) {
             result.add(new UserModel(users.next()));
         }
@@ -60,25 +59,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer newUser(UserModel userModel) {
-        User newUser = new User();
-        newUser.setUsername(userModel.getUsername());
-        newUser.setFirstName(userModel.getFirstName());
-        newUser.setLastName(userModel.getLastName());
-        newUser.setPhotoLink(userModel.getPhotoLink());
-        return userRepository.save(newUser).getId();
+        AppUser newAppUser = new AppUser();
+        newAppUser.setUsername(userModel.getUsername());
+        newAppUser.setFirstName(userModel.getFirstName());
+        newAppUser.setLastName(userModel.getLastName());
+        newAppUser.setPhotoLink(userModel.getPhotoLink());
+        return userRepository.save(newAppUser).getId();
     }
 
     @Override
     public Integer updateUser(UserModel userModel) throws UserDoesNotExistException {
         boolean userExists = userRepository.existsById(userModel.getId());
         if (userExists) {
-            User modifiedUser = new User(userModel.getId(),
+            AppUser modifiedAppUser = new AppUser(userModel.getId(),
                     userModel.getUsername(),
                     userModel.getFirstName(),
                     userModel.getLastName(),
                     userModel.getPhotoLink()
             );
-            return userRepository.save(modifiedUser).getId();
+            return userRepository.save(modifiedAppUser).getId();
         } else {
             throw new UserDoesNotExistException();
         }
@@ -92,7 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience) {
 
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<AppUser> optionalUser = userRepository.findById(userId);
         return optionalUser.map(user -> {
             Company company = companyRepository
                     .findByName(newExperience.getCompanyName())

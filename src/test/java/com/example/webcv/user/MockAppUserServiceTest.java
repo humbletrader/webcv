@@ -9,7 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class MockUserServiceTest {
+class MockAppUserServiceTest {
 
     @Autowired
     MockUserService mockUserService;

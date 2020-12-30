@@ -1,6 +1,6 @@
 package com.example.webcv.certification;
 
-import com.example.webcv.user.User;
+import com.example.webcv.user.AppUser;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,7 +16,7 @@ public class Certification {
     private String certificationName;
 
     @ManyToMany
-    private Set<User> users = new HashSet<>();
+    private Set<AppUser> appUsers = new HashSet<>();
 
     public Certification(){
 
@@ -38,11 +38,11 @@ public class Certification {
         this.certificationName = certificationName;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<AppUser> getUsers() {
+        return appUsers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUsers(Set<AppUser> appUsers) {
+        this.appUsers = appUsers;
     }
 }

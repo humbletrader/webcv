@@ -30,7 +30,7 @@ public class UserModel {
         this.experiences = experiences;
     }
 
-    public UserModel(User source){
+    public UserModel(AppUser source){
         this.id = source.getId();
         this.username = source.getUsername();
         this.firstName = source.getFirstName();

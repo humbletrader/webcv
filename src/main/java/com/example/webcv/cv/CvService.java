@@ -1,12 +1,9 @@
 package com.example.webcv.cv;
 
-import com.example.webcv.user.User;
 import com.example.webcv.user.UserDoesNotExistException;
 import com.example.webcv.user.UserModel;
 import com.example.webcv.user.UserService;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CvService {

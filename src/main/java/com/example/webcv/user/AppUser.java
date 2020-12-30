@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +21,15 @@ public class User {
     private String lastName;
     private String photoLink;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "appUser")
     private Set<Experience> experience = new HashSet<>();
 
     @ManyToMany
     private Set<Certification> certifications = new HashSet<>();
 
-    public User(){}
+    public AppUser(){}
 
-    public User(Integer id, String username, String firstName, String lastName, String photoLink) {
+    public AppUser(Integer id, String username, String firstName, String lastName, String photoLink) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -83,9 +83,9 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        AppUser appUser = (AppUser) o;
 
-        return id.equals(user.id);
+        return id.equals(appUser.id);
     }
 
     @Override
