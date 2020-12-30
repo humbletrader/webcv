@@ -5,11 +5,6 @@ server:
 
 #h2 database properties
 spring :
-  jpa:
-    show-sql: true
-    properties:
-        hibernate:
-          format_sql=true:
   datasource :
     url: "jdbc:h2:mem:dbcv"
     driverClassName: org.h2.Driver

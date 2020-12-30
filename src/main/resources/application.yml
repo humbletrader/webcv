@@ -5,6 +5,19 @@
 server:
   port: 8081
 
+
+# jpa / hibernate config
+
+spring :
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        hbm2ddl:
+          auto: create-drop;
+
+
 # actuator properties
 management:
   endpoints:

@@ -4,8 +4,6 @@ server:
 
 #postgres database properties
 spring :
-  jpa:
-    show-sql: true
   datasource :
     driverClassName: org.postgresql.Driver
     url: ${SPRING_DATASOURCE_URL}
