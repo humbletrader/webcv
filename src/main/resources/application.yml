@@ -1,6 +1,10 @@
 # settings commons to all profiles
 
 
+# server properties
+server:
+  port: 8081
+
 # actuator properties
 management:
   endpoints:
