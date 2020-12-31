@@ -5,6 +5,8 @@ import com.example.webcv.user.UserModel;
 import com.example.webcv.user.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 public class CvService {
 
@@ -17,7 +19,7 @@ public class CvService {
     public CvModel retrieveCv(Integer userId) throws UserDoesNotExistException{
         UserModel user = userService.retrieveUser(userId).orElseThrow( UserDoesNotExistException::new);
 
-        return new CvModel(user.getFirstName(), user.getLastName(), user.getPhotoLink(), user.getExperiences());
+        return new CvModel(user.getFirstName(), user.getLastName(), user.getPhotoLink(), Collections.emptySet());
     }
 
 }

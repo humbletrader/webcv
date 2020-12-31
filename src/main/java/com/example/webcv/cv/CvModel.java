@@ -1,6 +1,5 @@
 package com.example.webcv.cv;
 
-import com.example.webcv.experience.Experience;
 import com.example.webcv.experience.ExperienceModel;
 
 import java.util.Set;
