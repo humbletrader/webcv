@@ -1,14 +1,12 @@
 package com.example.webcv.user;
 
 
-import com.example.webcv.certification.Certification;
-import com.example.webcv.certification.CertificationModel;
 import com.example.webcv.certification.UserCertificationRepository;
 import com.example.webcv.company.Company;
 import com.example.webcv.company.CompanyRepository;
 import com.example.webcv.experience.Experience;
 import com.example.webcv.experience.ExperienceModel;
-import com.example.webcv.experience.ExperienceRepository;
+import com.example.webcv.experience.UserExperienceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -24,18 +22,18 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final ExperienceRepository experienceRepository;
+    private final UserExperienceRepository userExperienceRepository;
 
     private final UserCertificationRepository userCertificationRepository;
 
     //autowiring of parameters done by default by spring (since 4.x or something)
     public UserServiceImpl(CompanyRepository companyRepository,
-                           ExperienceRepository experienceRepository,
+                           UserExperienceRepository userExperienceRepository,
                            UserCertificationRepository userCertificationRepository,
                            UserRepository userRepository) {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
-        this.experienceRepository = experienceRepository;
+        this.userExperienceRepository = userExperienceRepository;
         this.userCertificationRepository = userCertificationRepository;
     }
 
@@ -83,61 +81,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
-    }
-
-    @Override
-    public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience) {
-
-        Optional<AppUser> optionalUser = userRepository.findById(userId);
-        return optionalUser.map(user -> {
-            Company company = companyRepository
-                    .findByName(newExperience.getCompanyName())
-                    .orElseGet(() -> {
-                        logger.info("company {} not found. Creating new company ..", newExperience.getCompanyName());
-                        Company newComp = new Company();
-                        newComp.setName(newExperience.getCompanyName());
-                        return companyRepository.save(newComp);
-                    });
-
-            Experience exp = new Experience();
-            exp.setUser(user);
-            exp.setJobTitle(newExperience.getJobTitle());
-            exp.setCompany(company);
-            exp.setJobStart(newExperience.getJobStart());
-            exp.setJobEnd(newExperience.getJobEnd());
-
-            return experienceRepository.save(exp).getId();
-        });
-    }
-
-    @Override
-    public Optional<Integer> updateExperience(Integer userId, ExperienceModel updatedExperience) {
-        logger.info("searching for user {} and experience {}", userId, updatedExperience.getExpId());
-        return userRepository.findById(userId).flatMap(user -> {
-            logger.info("found user {} ", user.getId());
-            //todo: we should replace this with a single findByUserAndExpId instead of performing two queries
-            return experienceRepository
-                    .findById(updatedExperience.getExpId())
-                    .map(experience -> {
-                        logger.info("found experience {}", experience.getId());
-                        experience.setJobTitle(updatedExperience.getJobTitle());
-                        //todo: handle change of company
-                        experience.setJobStart(updatedExperience.getJobStart());
-                        experience.setJobEnd(updatedExperience.getJobEnd());
-                        return experienceRepository.save(experience).getId();
-                    });
-        });
-    }
-
-    @Override
-    public Optional<Integer> deleteExperience(Integer userId, Integer experienceId) {
-        return userRepository
-                .findById(userId)
-                .flatMap(user -> {
-                    //todo: delete in one single statement (where userid = ? and expId =? )
-                    experienceRepository.deleteById(experienceId);
-                    return Optional.empty();
-                });
     }
 
 

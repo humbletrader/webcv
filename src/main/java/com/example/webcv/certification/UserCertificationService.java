@@ -8,4 +8,6 @@ public interface UserCertificationService {
 
     Iterable<CertificationModel> retrieveCertifications(Integer userId);
 
+
+
 }

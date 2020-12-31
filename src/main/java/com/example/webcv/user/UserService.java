@@ -17,11 +17,4 @@ public interface UserService {
 
     void deleteUser(Integer userId);
 
-    Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience);
-
-    Optional<Integer> updateExperience(Integer userId, ExperienceModel updatedExperience);
-
-    Optional<Integer> deleteExperience(Integer userId, Integer experienceId);
-
-
 }

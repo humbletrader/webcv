@@ -73,21 +73,6 @@ public class MockUserService implements UserService,
     }
 
     @Override
-    public Optional<Integer> addExperience(Integer userId, ExperienceModel newExperience) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Integer> updateExperience(Integer userId, ExperienceModel updatedExperience) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Integer> deleteExperience(Integer userId, Integer experienceId){
-        return Optional.empty();
-    }
-
-    @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         System.out.println("this is called the second - setting bean factory");
         System.out.println("setting bean factory to my MockUserService because it is BeanFactoryAware");
