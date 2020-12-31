@@ -9,3 +9,11 @@ curl -v http://localhost:$TOMCAT_PORT/webcv/users/1/certifications \
      --header "Content-Type: application/json" \
      --request POST \
      --data '{"certificationId": "1", "certificationName": "SCJP"}'
+
+curl -v http://localhost:$TOMCAT_PORT/webcv/users/1/certifications \
+     --header "Content-Type: application/json" \
+     --request POST \
+     --data '{"certificationId": "2", "certificationName": "Oracle PL/SQL Certification"}'
+
+curl -v http://localhost:$TOMCAT_PORT/webcv/users/1/certifications \
+     --request GET

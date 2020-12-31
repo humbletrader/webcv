@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -83,11 +84,6 @@ public class MockUserService implements UserService,
 
     @Override
     public Optional<Integer> deleteExperience(Integer userId, Integer experienceId){
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Integer> addCertification(Integer userId, CertificationModel newCertification){
         return Optional.empty();
     }
 

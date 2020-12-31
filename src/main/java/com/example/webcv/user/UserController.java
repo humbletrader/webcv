@@ -23,7 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    //check below for a simple usage ( shortcat GetMapping)
+    //check below for a simple usage (shortcut GetMapping)
     @RequestMapping (path = "/users", method = RequestMethod.GET)
     public ResponseEntity<Iterable<UserModel>> retrieveUsers(){
         return new ResponseEntity<>(userService.retrieveAllUsers(), HttpStatus.OK);
@@ -87,11 +87,6 @@ public class UserController {
         return new ResponseEntity<>(userId, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/users/{id}/certifications")
-    public ResponseEntity<Integer> addCertification(@PathVariable(name = "id") Integer userId,
-                                                    @RequestBody() CertificationModel certifModel){
-        Optional<Integer> id = userService.addCertification(userId, certifModel);
-        return new ResponseEntity<>(id.orElse(-1), HttpStatus.CREATED);
-    }
+
 
 }

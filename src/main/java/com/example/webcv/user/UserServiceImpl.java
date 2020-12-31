@@ -3,7 +3,7 @@ package com.example.webcv.user;
 
 import com.example.webcv.certification.Certification;
 import com.example.webcv.certification.CertificationModel;
-import com.example.webcv.certification.CertificationRepository;
+import com.example.webcv.certification.UserCertificationRepository;
 import com.example.webcv.company.Company;
 import com.example.webcv.company.CompanyRepository;
 import com.example.webcv.experience.Experience;
@@ -13,10 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,17 +26,17 @@ public class UserServiceImpl implements UserService {
 
     private final ExperienceRepository experienceRepository;
 
-    private final CertificationRepository certificationRepository;
+    private final UserCertificationRepository userCertificationRepository;
 
     //autowiring of parameters done by default by spring (since 4.x or something)
     public UserServiceImpl(CompanyRepository companyRepository,
                            ExperienceRepository experienceRepository,
-                           CertificationRepository certificationRepository,
+                           UserCertificationRepository userCertificationRepository,
                            UserRepository userRepository) {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
         this.experienceRepository = experienceRepository;
-        this.certificationRepository = certificationRepository;
+        this.userCertificationRepository = userCertificationRepository;
     }
 
     @Override
@@ -143,19 +140,5 @@ public class UserServiceImpl implements UserService {
                 });
     }
 
-    @Override
-    public Optional<Integer> addCertification(Integer userId, CertificationModel certifModel) {
-        return userRepository.findById(userId).map(user -> {
 
-            //todo: check if the certification already exists
-            Certification newCertification = new Certification();
-            newCertification.setId(certifModel.getCertificationId());
-            newCertification.setCertificationName(certifModel.getCertificationName());
-            newCertification.getUsers().add(user);
-            user.getCertifications().add(certificationRepository.save(newCertification));
-            userRepository.save(user);
-
-            return newCertification.getId();
-        });
-    }
 }
