@@ -1,7 +1,7 @@
 #!/bin/sh
 
-APP_HOST=localhost
-TOMCAT_PORT=8081
+APP_HOST=webcv.herokuapp.com
+TOMCAT_PORT=80
 
 printf "\n\n*********************************************************"
 printf "\n          adding two users "
@@ -57,7 +57,7 @@ curl -v $APP_HOST:$TOMCAT_PORT/webcv/users
 printf "\n\n**********************************************************"
 printf "\n             deleting a user "
 printf "\n**********************************************************\n"
-curl http://$APP_HOST:$TOMCAT_PORT/webcv/users/3 \
+curl http//$APP_HOST:$TOMCAT_PORT/webcv/users/3 \
  --request DELETE
 
 
