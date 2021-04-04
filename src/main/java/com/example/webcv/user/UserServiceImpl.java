@@ -70,7 +70,8 @@ public class UserServiceImpl implements UserService {
                     userModel.getUsername(),
                     userModel.getFirstName(),
                     userModel.getLastName(),
-                    userModel.getPhotoLink()
+                    userModel.getPhotoLink(),
+                    userModel.getVersion()
             );
             return userRepository.save(modifiedAppUser).getId();
         } else {

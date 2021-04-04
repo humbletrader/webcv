@@ -13,13 +13,16 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int id;
 
     private String username;
 
     private String firstName;
     private String lastName;
     private String photoLink;
+
+    @Version
+    private int version;
 
     @OneToMany(mappedBy = "appUser")
     private Set<Experience> experience = new HashSet<>();
@@ -29,12 +32,13 @@ public class AppUser {
 
     public AppUser(){}
 
-    public AppUser(Integer id, String username, String firstName, String lastName, String photoLink) {
+    public AppUser(int id, String username, String firstName, String lastName, String photoLink, int version) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.photoLink = photoLink;
+        this.version = version;
     }
 
     public Integer getId() {
@@ -78,6 +82,14 @@ public class AppUser {
         this.certifications = certifications;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int v){
+        this.version = v;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,12 +97,12 @@ public class AppUser {
 
         AppUser appUser = (AppUser) o;
 
-        return id.equals(appUser.id);
+        return id == appUser.id;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id;
     }
 
     @Override

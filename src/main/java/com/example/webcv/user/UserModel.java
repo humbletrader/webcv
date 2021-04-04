@@ -9,22 +9,25 @@ import java.util.Set;
 
 public class UserModel {
 
-    private final Integer id;
+    private final int id;
     private final String username;
     private final String firstName;
     private final String lastName;
     private final String photoLink;
+    private final int version;
 
-    public UserModel(Integer id,
+    public UserModel(int id,
                      String username,
                      String firstName,
                      String lastName,
-                     String photoLink) {
+                     String photoLink,
+                     int version) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.photoLink = photoLink;
+        this.version = version;
     }
 
     public UserModel(AppUser source){
@@ -33,9 +36,10 @@ public class UserModel {
         this.firstName = source.getFirstName();
         this.lastName = source.getLastName();
         this.photoLink = source.getPhotoLink();
+        this.version = source.getVersion();
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -53,6 +57,10 @@ public class UserModel {
 
     public String getPhotoLink() {
         return photoLink;
+    }
+
+    public int getVersion(){
+        return version;
     }
 
 }

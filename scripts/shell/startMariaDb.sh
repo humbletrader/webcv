@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 sudo docker run --name maria-container \
 	-p 3306:3306 \
