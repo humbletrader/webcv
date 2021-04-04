@@ -23,7 +23,8 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,loggers,beans,mappings
+        include: "*"
+        #include: health,info,metrics,loggers,beans,mappings
   endpoint:
     health:
       show-details: always
